@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -17,7 +16,19 @@ var rimdigits = map[string]int{
 	"VIII": 8,
 	"IX":   9,
 	"X":    10,
-	"XL":   40, "L": 50, "XC": 90, "C": 100, "CD": 400, "D": 500, "DC": 600, "CM": 900, "M": 1000,
+}
+
+var stigidmir = map[int]string{
+	1:  "I",
+	2:  "II",
+	3:  "III",
+	4:  "IV",
+	5:  "V",
+	6:  "VI",
+	7:  "VII",
+	8:  "VIII",
+	9:  "IX",
+	10: "X", 40: "XL", 50: "L", 90: "XC", 100: "C", 400: "CD", 500: "D", 600: "DC", 900: "CM", 1000: "M",
 }
 
 func rimdig(s string) bool {
@@ -58,10 +69,9 @@ func main() {
 	var operand1 string
 	var operand2 string
 	var result int
-	var result1 int
 
 	fmt.Println("Введите выражение: ")
-	fmt.Scan(&operand1, &operator, &operand2)
+	fmt.Scanln(&operand1, &operator, &operand2)
 
 	for rimdig(operand1) {
 		if rimdig(operand2) {
@@ -73,81 +83,69 @@ func main() {
 			switch operator {
 			case "+":
 				result = rimdigits[operand1] + rimdigits[operand2]
+				fmt.Println(stigidmir[result])
 
 			case "-":
 				result = rimdigits[operand1] - rimdigits[operand2]
+				if result > 0 {
+					fmt.Println(stigidmir[result])
+				} else {
+					panic("В римской системе счисления нет отрицательных чисел")
+				}
 
 			case "*":
-				result = rimdigits[operand1] + rimdigits[operand2]
+				result = rimdigits[operand1] * rimdigits[operand2]
+				fmt.Println(stigidmir[result])
 
 			case "/":
 				result = rimdigits[operand1] / rimdigits[operand2]
+				if result > 1 {
+					fmt.Println(stigidmir[result])
+				} else {
+					panic("Результатом деления является только целое число")
+				}
+
+			default:
+				fmt.Println("Строка не является математической операцией!!!")
+
 			}
+		} else {
+			panic("Используются 2 разные системы счисления")
 		}
-
-		fmt.Println(result)
-
 		break
 	}
 
 	for arabdig(operand1) {
 		if arabdig(operand2) {
 			operand1 = strings.TrimSpace(operand1)
-			operator1, _ := strconv.Atoi(operand1)
+			//operator1, _ := strconv.Atoi(operand1)
 
 			operand2 = strings.TrimSpace(operand2)
-			operator2, _ := strconv.Atoi(operand2)
+			//operator2, _ := strconv.Atoi(operand2)
 			switch operator {
 			case "+":
-				result1 = operator1 + operator2
+				result = arabdigits[operand1] + arabdigits[operand2]
+				fmt.Println(result)
 
 			case "-":
-				result1 = operator1 - operator2
+				result = arabdigits[operand1] - arabdigits[operand2]
+				fmt.Println(result)
 
 			case "*":
-				result1 = operator1 * operator2
+				result = arabdigits[operand1] * arabdigits[operand2]
+				fmt.Println(result)
 
 			case "/":
-				result1 = operator1 / operator2
+				result = arabdigits[operand1] / arabdigits[operand2]
+				fmt.Println(result)
+
+			default:
+				fmt.Println("Строка не является математической операцией!!!")
 			}
-			fmt.Println(result1)
+		} else {
+			panic("Используются 2 разные системы счисления")
 		}
 		break
 
 	}
-
-	/*operand1 = strings.TrimSpace(operand1)
-	operator1, _ := strconv.Atoi(operand1)
-
-	operand2 = strings.TrimSpace(operand2)
-	operator2, _ := strconv.Atoi(operand2)*/
-
-	/*operand1, _ := strconv.Atoi(strings.TrimSpace(operand1Str))
-
-	operand2Str, _ := reader.Readstring('n')*/
-	//name, _ := strconv.Atoi(strings.TrimSpace(nameStr))
-	/*var operand1 int
-	var operand2 int
-	var result int*/
-
-	/*fmt.Println("Введите свое выражение: ")
-	  fmt.Scan(&operand1, &operator, &operand2)
-
-	  switch operator {
-	  case "+":
-	  	result = operand1 + operand2
-
-	  case "-":
-	  	result = operand1 - operand2
-
-	  case "*":
-	  	result = operand1 * operand2
-
-	  case "/":
-	  	result = operand1 / operand2
-	  }
-	  fmt.Println(result)*/
 }
-
-//fmt.Println(rimdigits[name] + rimdigits[name1])
-//fmt.Println(operator + operator2)
