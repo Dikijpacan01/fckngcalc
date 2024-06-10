@@ -38,11 +38,13 @@ var stigidmir = map[int]string{
 }
 
 func rimdig(s string) bool {
-	for _, c := range s {
-		if _, ok := rimdigits[string(c)]; !ok {
-			return false
-		}
+	/*for _, c := range s {
+	if _, ok := rimdigits[string(c)]; !ok {
+		return false*/
+	if rimdigits[s] == 0 {
+		return false
 	}
+
 	return true
 
 }
