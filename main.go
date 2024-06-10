@@ -38,13 +38,14 @@ var stigidmir = map[int]string{
 }
 
 func rimdig(s string) bool {
-	/*for _, c := range s {
-	if _, ok := rimdigits[string(c)]; !ok {
-		return false*/
-	if rimdigits[s] == 0 {
-		return false
+	for _, c := range s {
+		if _, ok := rimdigits[string(c)]; !ok {
+			return false
+			/*if rimdigits[s] == 0 {
+				return false
+			}*/
+		}
 	}
-
 	return true
 
 }
@@ -91,7 +92,7 @@ func main() {
 			operand1 = strings.TrimSpace(operand1)
 			operand2 = strings.TrimSpace(operand2)
 
-			if rimdigits[operand1] <= 10 && rimdigits[operand2] <= 10 && len(operand1) <= 4 && len(operand2) <= 4 && len(trash) < 1 {
+			if rimdigits[operand1] <= 10 && rimdigits[operand2] <= 10 && /*len(operand1) <= 4 && len(operand2) <= 4 &&*/ len(trash) < 1 && rimdigits[operand1] != 0 && rimdigits[operand2] != 0 {
 				switch operator {
 				case "+":
 					result = rimdigits[operand1] + rimdigits[operand2]
