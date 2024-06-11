@@ -87,85 +87,97 @@ func main() {
 	fmt.Println("Введите выражение: ")
 	fmt.Scanln(&operand1, &operator, &operand2, &trash)
 
-	for rimdig(operand1) {
-		if rimdig(operand1) && rimdig(operand2) {
-			operand1 = strings.TrimSpace(operand1)
-			operand2 = strings.TrimSpace(operand2)
+	if rimdig(operand1) || arabdig(operand1) && rimdig(operand2) || arabdig(operand2) {
 
-			if rimdigits[operand1] <= 10 && rimdigits[operand2] <= 10 && /*len(operand1) <= 4 && len(operand2) <= 4 &&*/ len(trash) < 1 && rimdigits[operand1] != 0 && rimdigits[operand2] != 0 {
-				switch operator {
-				case "+":
-					result = rimdigits[operand1] + rimdigits[operand2]
-					fmt.Println(stigidmir[result])
+		for rimdig(operand1) {
+			if rimdig(operand1) && rimdig(operand2) {
+				operand1 = strings.TrimSpace(operand1)
+				operand2 = strings.TrimSpace(operand2)
+				if len(operator) > 0 && len(operator) <= 1 {
+					if rimdigits[operand1] <= 10 && rimdigits[operand2] <= 10 && len(trash) < 1 && rimdigits[operand1] > 0 && rimdigits[operand2] > 0 {
+						switch operator {
+						case "+":
+							result = rimdigits[operand1] + rimdigits[operand2]
+							fmt.Println(stigidmir[result])
 
-				case "-":
-					result = rimdigits[operand1] - rimdigits[operand2]
-					if result > 0 {
-						fmt.Println(stigidmir[result])
+						case "-":
+							result = rimdigits[operand1] - rimdigits[operand2]
+							if result > 0 {
+								fmt.Println(stigidmir[result])
+							} else {
+								panic("В римской системе счисления нет отрицательных чисел")
+							}
+
+						case "*":
+							result = rimdigits[operand1] * rimdigits[operand2]
+							fmt.Println(stigidmir[result])
+
+						case "/":
+							result = rimdigits[operand1] / rimdigits[operand2]
+							if result >= 1 {
+								fmt.Println(stigidmir[result])
+							} else {
+								panic("Результатом деления является только целое число")
+							}
+
+						default:
+							panic("Строка не является математической операцией!!!")
+						}
 					} else {
-						panic("В римской системе счисления нет отрицательных чисел")
+						panic("Калькулятор принимает на ввод только два числа (от I до X включительно) и один оператор (+, -, *, /)")
 					}
-
-				case "*":
-					result = rimdigits[operand1] * rimdigits[operand2]
-					fmt.Println(stigidmir[result])
-
-				case "/":
-					result = rimdigits[operand1] / rimdigits[operand2]
-					if result >= 1 {
-						fmt.Println(stigidmir[result])
-					} else {
-						panic("Результатом деления является только целое число")
-					}
-
-				default:
-					panic("Строка не является математической операцией!!!")
+				} else {
+					panic("Строка не является математической операцией!")
 				}
 			} else {
-				panic("Калькулятор принимает на ввод только 2 числа от I до X включительно")
+				panic("Используются 2 разные системы счисления")
 			}
-		} else {
-			panic("Используются 2 разные системы счисления")
+			break
 		}
-		break
-	}
 
-	for arabdig(operand2) {
-		if arabdig(operand1) && arabdig(operand2) {
+		for arabdig(operand1) {
+			if arabdig(operand1) && arabdig(operand2) {
 
-			operand1 = strings.TrimSpace(operand1)
-			operator1, _ := strconv.Atoi(operand1)
-			operand2 = strings.TrimSpace(operand2)
-			operator2, _ := strconv.Atoi(operand2)
-			if operator1 <= 10 && operator2 <= 10 /*&& operator1 != 0 && operator2 != 0*/ && len(trash) < 1 {
+				operand1 = strings.TrimSpace(operand1)
+				operator1, _ := strconv.Atoi(operand1)
+				operand2 = strings.TrimSpace(operand2)
+				operator2, _ := strconv.Atoi(operand2)
+				if len(operator) > 0 && len(operator) <= 1 {
+					if operator1 <= 10 && operator2 <= 10 && arabdigits[operand1] != 0 && arabdigits[operand2] != 0 && len(trash) < 1 {
 
-				switch operator {
-				case "+":
-					result = arabdigits[operand1] + arabdigits[operand2]
-					fmt.Println(result)
+						switch operator {
+						case "+":
+							result = arabdigits[operand1] + arabdigits[operand2]
+							fmt.Println(result)
 
-				case "-":
-					result = arabdigits[operand1] - arabdigits[operand2]
-					fmt.Println(result)
+						case "-":
+							result = arabdigits[operand1] - arabdigits[operand2]
+							fmt.Println(result)
 
-				case "*":
-					result = arabdigits[operand1] * arabdigits[operand2]
-					fmt.Println(result)
+						case "*":
+							result = arabdigits[operand1] * arabdigits[operand2]
+							fmt.Println(result)
 
-				case "/":
-					result = arabdigits[operand1] / arabdigits[operand2]
-					fmt.Println(result)
+						case "/":
+							result = arabdigits[operand1] / arabdigits[operand2]
+							fmt.Println(result)
 
-				default:
-					panic("Строка не является математической операцией!!!")
+						default:
+							panic("Строка не является математической операцией!!!")
+						}
+					} else {
+						panic("Калькулятор принимает на ввод только два числа (от I до X включительно) и один оператор (+, -, *, /)")
+					}
+				} else {
+					panic("Строка не является математическо операцией!")
 				}
 			} else {
-				panic("Калькулятор принимает на ввод только 2 числа от 1 до 10 включительно")
+				panic("Используются 2 разные системы счисления")
 			}
-		} else {
-			panic("Используются 2 разные системы счисления")
+			break
 		}
-		break
+	} else {
+		panic("Только арабские или римские цифры, чел")
 	}
 
 }
