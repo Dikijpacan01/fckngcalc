@@ -87,7 +87,7 @@ func main() {
 	fmt.Println("Введите выражение: ")
 	fmt.Scanln(&operand1, &operator, &operand2, &trash)
 
-	if rimdig(operand1) || arabdig(operand1) && rimdig(operand2) || arabdig(operand2) && len(operand1) <= 1 && len(operand2) <= 1 {
+	if rimdig(operand1) || arabdig(operand1) && rimdig(operand2) || arabdig(operand2) && len(operand1) <= 2 && len(operand2) <= 2 {
 
 		for rimdig(operand1) {
 			if rimdig(operand1) && rimdig(operand2) {
@@ -166,7 +166,7 @@ func main() {
 							panic("Строка не является математической операцией!!!")
 						}
 					} else {
-						panic("Калькулятор принимает на ввод только два числа (от I до X включительно) и один оператор (+, -, *, /)")
+						panic("Калькулятор принимает на ввод только два числа (от 1 до 10 включительно) и один оператор (+, -, *, /)")
 					}
 				} else {
 					panic("Строка не является математическо операцией!")
