@@ -87,7 +87,7 @@ func main() {
 	fmt.Println("Введите выражение: ")
 	fmt.Scanln(&operand1, &operator, &operand2, &trash)
 
-	if rimdig(operand1) || arabdig(operand1) && rimdig(operand2) || arabdig(operand2) {
+	if rimdig(operand1) || arabdig(operand1) && rimdig(operand2) || arabdig(operand2) && len(operand1) <= 1 && len(operand2) <= 1 {
 
 		for rimdig(operand1) {
 			if rimdig(operand1) && rimdig(operand2) {
@@ -177,7 +177,7 @@ func main() {
 			break
 		}
 	} else {
-		panic("Только арабские или римские цифры, чел")
+		panic("Выражение введено некорректно")
 	}
 
 }
